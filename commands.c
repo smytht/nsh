@@ -3861,3 +3861,62 @@ done:
 	close(fd);
 	return 0;
 }
+
+/*
+ * PF table operations
+ */
+static int
+pf_table_show(int argc, char **argv, ...)
+{
+	if (argc < 2) {
+		printf("%% Usage: pf table <table_name>\n");
+		return (0);
+	}
+
+	if (systemf("%s -t %s -T show", PFCTL, argv[1]) == -1)
+		return (1);
+
+	return (0);
+}
+
+static int
+pf_table_add(int argc, char **argv, ...)
+{
+	if (argc < 3) {
+		printf("%% Usage: pf table add <table_name> <address>\n");
+		return (0);
+	}
+
+	if (systemf("%s -t %s -T add %s", PFCTL, argv[1], argv[2]) == -1)
+		return (1);
+
+	return (0);
+}
+
+static int
+pf_table_del(int argc, char **argv, ...)
+{
+	if (argc < 3) {
+		printf("%% Usage: pf table del <table_name> <address>\n");
+		return (0);
+	}
+
+	if (systemf("%s -t %s -T delete %s", PFCTL, argv[1], argv[2]) == -1)
+		return (1);
+
+	return (0);
+}
+
+static int
+pf_table_flush(int argc, char **argv, ...)
+{
+	if (argc < 2) {
+		printf("%% Usage: pf table flush <table_name>\n");
+		return (0);
+	}
+
+	if (systemf("%s -t %s -T flush", PFCTL, argv[1]) == -1)
+		return (1);
+
+	return (0);
+}
