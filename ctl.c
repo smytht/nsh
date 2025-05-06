@@ -118,6 +118,9 @@ struct ctl ctl_pf[] = {
             { PFCTL, "-nvvf", REQTEMP, NULL }, { NULL }, NULL, 0, T_EXEC },
 	{ "reload",	"test and apply staged firewall rules",
 	    { PFCTL, "-f", REQTEMP, NULL }, { NULL }, NULL, 0, T_EXEC },
+		{ "table",	"manipulate pf tables",
+	    { PFCTL, "-t", OPT, "-T", OPT, OPT, NULL }, { NULL }, NULL, 0, T_EXEC },
+
 	{ NULL, NULL, { NULL }, { NULL }, NULL, 0, 0 }
 };
 
